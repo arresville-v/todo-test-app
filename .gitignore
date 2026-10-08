@@ -1,0 +1,71 @@
+# Build output
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+
+# Visual Studio
+.vs/
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs
+*.log
+logs/
+
+# Test results
+TestResults/
+*.trx
+coverage/
+coverage.xml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+
+# User-specific configuration
+*.rsuser
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+
+# Publish output
+publish/
+*.publishsettings
+
+# Entity Framework migrations generated binaries
+*.dll
+*.pdb
+
+# ASP.NET Core HTTPS development certificates
+*.pfx
+
+# Generated files
+Generated/
+
+# Angular
+node_modules/
+cache/

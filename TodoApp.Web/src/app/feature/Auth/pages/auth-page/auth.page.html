@@ -1,0 +1,48 @@
+<main class="auth-shell">
+  <section class="auth-card">
+    <p class="eyebrow">TODO Test App</p>
+    <h1>{{ isRegisterPage ? 'Create your account' : 'Welcome back' }}</h1>
+    <p class="intro">{{ isRegisterPage ? 'Set up your account to start planning.' : 'Sign in to see your todo list.' }}</p>
+
+    @if (registered) {
+    <div class="success-banner">Your account is ready. Sign in to continue.</div>
+    }
+    @if (errorMessage()) {
+    <div class="error-banner" role="alert">{{ errorMessage() }}</div>
+    }
+
+    <form (ngSubmit)="submit()">
+      @if (isRegisterPage) {
+      <label>
+        <span>Name</span>
+        <input [(ngModel)]="form.name" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        <span>Email</span>
+        <input [(ngModel)]="form.email" name="email" type="email" autocomplete="email" required />
+      </label>
+      }
+      <label>
+        <span>Username</span>
+        <input [(ngModel)]="form.userName" name="userName" autocomplete="username" required />
+      </label>
+
+      <label>
+        <span>Password</span>
+        <input [(ngModel)]="form.password" name="password" type="password"
+          [autocomplete]="isRegisterPage ? 'new-password' : 'current-password'" required />
+      </label>
+
+      <button class="primary-button" type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Please wait…' : isRegisterPage ? 'Create account' : 'Sign in' }}
+      </button>
+    </form>
+
+    <p class="switch-auth">
+      {{ isRegisterPage ? 'Already have an account?' : 'New to Todo Test App?' }}
+      <a [routerLink]="isRegisterPage ? '/login' : '/register'">
+        {{ isRegisterPage ? 'Sign in' : 'Create an account' }}
+      </a>
+    </p>
+  </section>
+</main>

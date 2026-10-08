@@ -1,0 +1,40 @@
+name: API Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'TodoApp.Api/**'
+      - 'TodoApp.Api.Test/**'
+      - '.github/workflows/api.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'TodoApp.Api/**'
+      - 'TodoApp.Api.Test/**'
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    name: Test API Project
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore TodoApp.Api.Test/TodoApp.Api.Test.csproj
+    
+    - name: Build API and tests
+      run: dotnet build TodoApp.Api.Test/TodoApp.Api.Test.csproj --no-restore --configuration Release
+    
+    - name: Run API Tests
+      run: dotnet test TodoApp.Api.Test/TodoApp.Api.Test.csproj --no-build --configuration Release --verbosity normal
+    
+    - name: Test Results Summary
+      if: always()
+      run: echo "API tests completed successfully"

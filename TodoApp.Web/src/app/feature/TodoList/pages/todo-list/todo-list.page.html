@@ -1,0 +1,101 @@
+<div class="todo-shell">
+  <div class="todo-card">
+    <header class="todo-header">
+      <div>
+        <p class="eyebrow">Todo Test App</p>
+        <h1>Todo List</h1>
+      </div>
+      <div class="header-actions">
+        <a class="account-link" routerLink="/user">{{ currentUser()?.name }}</a>
+        <button type="button" class="primary-button" (click)="openAddTodo()">+ Add todo</button>
+      </div>
+    </header>
+
+    <div class="summary-bar">
+      <div>
+        <span class="summary-label">Completed</span>
+        <strong>{{ completedTodos() }}</strong>
+      </div>
+      <div>
+        <span class="summary-label">Remaining</span>
+        <strong>{{ remainingTodos() }}</strong>
+      </div>
+    </div>
+
+    @if (store.error()) {
+      <div class="error-banner">
+        {{ store.error() }}
+      </div>
+    }
+
+    @for (group of todoGroups(); track group.label) {
+      <section class="todo-group">
+        <h2 class="group-heading"><span>{{ group.label }}</span></h2>
+        <ul class="todo-list">
+          @for (todo of group.todos; track todo.todoId) {
+            <li class="todo-item" [class.completed]="todo.completed" [class.warning]="isPastDue(todo)">
+              <label class="checkbox-wrap" aria-label="Mark todo as complete">
+                <input type="checkbox" [checked]="todo.completed" (change)="toggleTodo(todo.todoId)" />
+                <span class="checkmark"></span>
+              </label>
+
+              <div class="todo-content" (click)="openEditTodo(todo)">
+                <div class="todo-title-row">
+                  <span class="todo-title">{{ todo.title }}</span>
+                  @if (isPastDue(todo)) {
+                    <span class="due-pill">Past due</span>
+                  }
+                </div>
+                @if (todo.description) {
+                  <span class="todo-description">{{ todo.description }}</span>
+                }
+              </div>
+
+              <div class="todo-meta">
+                <span class="due-label">Due date</span>
+                <span>{{ formatDueDate(todo.dueDate) }}</span>
+              </div>
+
+              <button type="button" class="remove-button" (click)="removeTodo(todo.todoId)">Remove</button>
+            </li>
+          }
+        </ul>
+      </section>
+    } @empty {
+      <div class="empty-state">No todos yet. Add one above.</div>
+    }
+  </div>
+</div>
+
+@if (isModalOpen) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="todo-modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+      <header class="modal-header">
+        <h2>{{ selectedTodoId !== null ? 'Edit todo' : 'Add todo' }}</h2>
+        <button type="button" class="icon-button" (click)="closeModal()">×</button>
+      </header>
+
+      <form class="todo-form" (ngSubmit)="saveTodo()">
+        <label>
+          <span>Title</span>
+          <input type="text" [(ngModel)]="todoForm.title" name="title" placeholder="Enter todo title" required />
+        </label>
+
+        <label>
+          <span>Description</span>
+          <textarea [(ngModel)]="todoForm.description" name="description" rows="4" placeholder="Add some details"></textarea>
+        </label>
+
+        <label>
+          <span>Due date</span>
+          <input type="date" [(ngModel)]="todoForm.dueDate" name="dueDate" />
+        </label>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-button" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="primary-button">Save todo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

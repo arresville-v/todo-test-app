@@ -1,0 +1,40 @@
+<main class="user-shell">
+  <section class="user-card">
+    <header>
+      <a class="back-link" routerLink="/todo-list">← Back to todo</a>
+      <p class="eyebrow">Account</p>
+      <h1>Your profile</h1>
+      <p class="intro">Update the details associated with your Todo Test App account.</p>
+    </header>
+
+    @if (message()) {
+      <div class="success-banner" role="status">{{ message() }}</div>
+    }
+    @if (errorMessage()) {
+      <div class="error-banner" role="alert">{{ errorMessage() }}</div>
+    }
+
+    <form (ngSubmit)="save()">
+      <label>
+        <span>Name</span>
+        <input [(ngModel)]="form.name" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        <span>Username</span>
+        <input [(ngModel)]="form.userName" name="userName" autocomplete="username" required />
+      </label>
+      <label>
+        <span>Email</span>
+        <input [(ngModel)]="form.email" name="email" type="email" autocomplete="email" required />
+      </label>
+
+      <div class="actions">
+        <button class="secondary-button" type="button" (click)="backToTodoList()">Cancel</button>
+        <button class="primary-button" type="submit" [disabled]="submitting()">
+          {{ submitting() ? 'Saving…' : 'Save changes' }}
+        </button>
+      </div>
+    </form>
+    <button class="logout-button" type="button" (click)="logout()">Log out</button>
+  </section>
+</main>

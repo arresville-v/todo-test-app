@@ -1,0 +1,32 @@
+<div class="page-shell">
+  <div class="page-card">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">{{ isEditMode ? 'Edit todo' : 'New todo' }}</p>
+        <h1>{{ isEditMode ? 'Update todo' : 'Add todo' }}</h1>
+      </div>
+    </header>
+
+    <form class="todo-form">
+      <label>
+        <span>Title</span>
+        <input type="text" [(ngModel)]="form.title" name="title" placeholder="Enter todo title" required />
+      </label>
+
+      <label>
+        <span>Description</span>
+        <textarea [(ngModel)]="form.description" name="description" rows="5" placeholder="Describe the todo"></textarea>
+      </label>
+
+      <label>
+        <span>Due date</span>
+        <input type="date" [(ngModel)]="form.dueDate" name="dueDate" />
+      </label>
+
+      <div class="actions">
+        <button type="button" class="secondary-button" (click)="cancel()">Cancel</button>
+        <button type="submit" class="primary-button" (click)="saveTodo()">{{ isEditMode ? 'Save changes' : 'Save todo' }}</button>
+      </div>
+    </form>
+  </div>
+</div>

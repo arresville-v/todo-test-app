@@ -1,0 +1,100 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 28px 16px;
+  background: linear-gradient(135deg, #f4f0ff 0%, #edf6ff 100%);
+}
+
+.page-shell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
+}
+
+.page-card {
+  width: min(100%, 560px);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(122, 106, 216, 0.14);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 54px rgba(51, 46, 80, 0.1);
+}
+
+.page-header {
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #0e72ed;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+h1 {
+  margin: 0;
+  color: #211f2b;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.todo-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #2c2a39;
+  font-weight: 600;
+}
+
+.todo-form input,
+.todo-form textarea {
+  width: 100%;
+  border: 1px solid rgba(122, 106, 216, 0.2);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  color: #221f2f;
+  background: #fff;
+}
+
+.todo-form input:focus,
+.todo-form textarea:focus {
+  outline: none;
+  border-color: #0e72ed;
+  box-shadow: 0 0 0 4px rgba(122, 106, 216, 0.12);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.primary-button,
+.secondary-button {
+  border: none;
+  border-radius: 12px;
+  min-height: 46px;
+  padding: 0 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #6c5ce7, #0e72ed);
+  color: #fff;
+}
+
+.secondary-button {
+  background: #f2f1fa;
+  color: #2e2d40;
+}
